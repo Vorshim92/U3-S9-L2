@@ -1,12 +1,17 @@
 #root {
-  background-color: #282c34;
   min-height: 100vh;
+  background-color: #282c34;
+}
+header {
+  /* min-height: 20vh; */
 }
 main {
   color: white;
   text-align: center;
+  min-height: 100vh;
 }
-
+footer {
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

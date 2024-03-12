@@ -1,22 +1,26 @@
 import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavbarComponent from "./NavbarComponent";
+import NavbarComponent from "./components/NavbarComponent";
+import FooterComponent from "./components/FooterComponent";
+import AlertComponent from "./components/AlertComponent";
+import CardComponent from "./components/CardComponent";
+
 function App() {
   return (
     <>
       <header>
         <NavbarComponent />
+        <AlertComponent />
       </header>
       <main>
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
+
+        <CardComponent />
       </main>
+      <footer>
+        <FooterComponent />
+      </footer>
     </>
   );
 }
