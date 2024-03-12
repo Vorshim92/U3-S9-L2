@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+import logo from "./logo.png";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarComponent from "./components/NavbarComponent";
@@ -18,7 +18,7 @@ function App() {
 
         <CardComponent />
       </main>
-      <footer>
+      <footer className="mt-5">
         <FooterComponent />
       </footer>
     </>
