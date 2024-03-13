@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 
 function Footer() {
   return (
-    <Container fluid className="bg-dark text-white">
+    <Container fluid className="bg-light text-black">
       <Row className="py-5">
         <Col xs={3} md={3} lg={3} xl={3}>
           Contattaci
@@ -16,7 +16,7 @@ function Footer() {
           Tutti i diritti sono riservati
         </Col>
         <Col xs={3} md={3} lg={3} xl={3}>
-          <span className="text-white">© 2024 VORSHIM</span>
+          <span>© 2024 VORSHIM</span>
         </Col>
       </Row>
     </Container>

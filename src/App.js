@@ -15,7 +15,6 @@ function App() {
       </header>
       <main>
         <img src={logo} className="App-logo" alt="logo" />
-
         <CardComponent />
       </main>
       <footer className="mt-5">

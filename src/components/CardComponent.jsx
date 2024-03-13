@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
-
+import GenerateCard from "./SingleBookComponent";
 import romance from "../json/romance.json";
 import fantasy from "../json/fantasy.json";
 import horror from "../json/horror.json";
@@ -18,13 +18,21 @@ console.log(allGenres);
 
 function DropdownList() {
   const [selectedGenre, setSelectedGenre] = useState(null);
+  const [selectedBook, setSelectedBook] = useState(null);
 
   function handleItemClick(index) {
     setSelectedGenre(index);
+    setSelectedBook(null);
+  }
+
+  function handleBookClick(book) {
+    setSelectedBook(book);
   }
 
   return (
     <>
+      {selectedBook !== null && <GenerateCard asin={selectedBook.asin} genre={selectedBook.genre} />}
+
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           Scegli il genere
@@ -37,28 +45,30 @@ function DropdownList() {
           <Dropdown.Item onClick={() => handleItemClick(3)}>History</Dropdown.Item>
           <Dropdown.Item onClick={() => handleItemClick(4)}>Sci-fi</Dropdown.Item>
         </Dropdown.Menu>
-        {selectedGenre !== null && generateCard(selectedGenre)}
       </Dropdown>
+      {selectedGenre !== null && <GenerateCards selectedGenre={selectedGenre} onBookClick={handleBookClick} />}
     </>
   );
 }
 
-function generateCard(genre) {
+function GenerateCards({ selectedGenre, onBookClick }) {
   return (
     <Container fluid>
-      <Row className="justify-content-center">
+      <Row className="justify-content-center gap-3">
         <h2 className="my-3 text-center">Ecco i nostri Libri!!</h2>
-        {allGenres[genre].map((book, i) => {
+        {allGenres[selectedGenre].map((book, i) => {
           if (i < 10) {
             return (
-              <Col xs={2}>
+              <Col xs={2} key={book.asin}>
                 <Card style={{ width: "18rem" }}>
                   <Card.Img variant="top" src={book.img} style={{ height: "400px" }} />
                   <Card.Body>
                     <Card.Title style={{ height: "100px" }}>{book.title}</Card.Title>
                     <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                     <small className="">{book.category}</small>
-                    <Button variant="primary">BUY IT</Button>
+                    <Button variant="primary" onClick={() => onBookClick({ asin: book.asin, genre: selectedGenre })}>
+                      VISUALIZZA
+                    </Button>
                     <small className="">{book.price}€</small>
                   </Card.Body>
                 </Card>
@@ -72,4 +82,5 @@ function generateCard(genre) {
   );
 }
 
+export { allGenres };
 export default DropdownList;
