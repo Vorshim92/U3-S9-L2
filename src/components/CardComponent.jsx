@@ -52,31 +52,34 @@ function DropdownList() {
 }
 
 function GenerateCards({ selectedGenre, onBookClick }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <Container fluid>
       <Row className="justify-content-center gap-3">
         <h2 className="my-3 text-center">Ecco i nostri Libri!!</h2>
-        {allGenres[selectedGenre].map((book, i) => {
-          if (i < 10) {
-            return (
-              <Col xs={2} key={book.asin}>
-                <Card style={{ width: "18rem" }}>
-                  <Card.Img variant="top" src={book.img} style={{ height: "400px" }} />
-                  <Card.Body>
-                    <Card.Title style={{ height: "100px" }}>{book.title}</Card.Title>
-                    <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
-                    <small className="">{book.category}</small>
-                    <Button variant="primary" onClick={() => onBookClick(book.asin)}>
-                      VISUALIZZA
-                    </Button>
-                    <small className="">{book.price}€</small>
-                  </Card.Body>
-                </Card>
-              </Col>
-            );
-          }
-          return null;
-        })}
+        <input type="text" placeholder="Cerca per titolo..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+        {allGenres[selectedGenre]
+          .filter((book) => {
+            return book.title.toLowerCase().includes(searchTerm.toLowerCase());
+          })
+          .slice(0, 10)
+          .map((book, i) => (
+            <Col xs={2} key={book.asin}>
+              <Card style={{ width: "18rem" }}>
+                <Card.Img variant="top" src={book.img} style={{ height: "400px" }} />
+                <Card.Body>
+                  <Card.Title style={{ height: "100px" }}>{book.title}</Card.Title>
+                  <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
+                  <small className="">{book.category}</small>
+                  <Button variant="primary" onClick={() => onBookClick(book.asin)}>
+                    VISUALIZZA
+                  </Button>
+                  <small className="">{book.price}€</small>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
       </Row>
     </Container>
   );
