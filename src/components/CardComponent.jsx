@@ -31,7 +31,7 @@ function DropdownList() {
 
   return (
     <>
-      {selectedBook !== null && <GenerateCard asin={selectedBook.asin} genre={selectedBook.genre} />}
+      {selectedBook !== null && <GenerateCard asin={selectedBook} genre={selectedGenre} />}
 
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -66,7 +66,7 @@ function GenerateCards({ selectedGenre, onBookClick }) {
                     <Card.Title style={{ height: "100px" }}>{book.title}</Card.Title>
                     <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
                     <small className="">{book.category}</small>
-                    <Button variant="primary" onClick={() => onBookClick({ asin: book.asin, genre: selectedGenre })}>
+                    <Button variant="primary" onClick={() => onBookClick(book.asin)}>
                       VISUALIZZA
                     </Button>
                     <small className="">{book.price}€</small>
