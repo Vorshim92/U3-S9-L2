@@ -60,9 +60,7 @@ function GenerateCards({ selectedGenre, onBookClick }) {
         <h2 className="my-3 text-center">Ecco i nostri Libri!!</h2>
         <input type="text" placeholder="Cerca per titolo..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
         {allGenres[selectedGenre]
-          .filter((book) => {
-            return book.title.toLowerCase().includes(searchTerm.toLowerCase());
-          })
+          .filter((book) => book.title.toLowerCase().includes(searchTerm.toLowerCase()))
           .slice(0, 10)
           .map((book, i) => (
             <Col xs={2} key={book.asin}>
