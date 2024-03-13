@@ -19,6 +19,7 @@ console.log(allGenres);
 function DropdownList() {
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [selectedButton, setSelectedButton] = useState("Seleziona una Categoria");
 
   function handleItemClick(index) {
     setSelectedGenre(index);
@@ -28,6 +29,9 @@ function DropdownList() {
   function handleBookClick(book) {
     setSelectedBook(book);
   }
+  const handleChange = (event) => {
+    setSelectedButton(event.target.innerText);
+  };
 
   return (
     <>
@@ -35,15 +39,50 @@ function DropdownList() {
 
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Scegli il genere
+          {selectedButton}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => handleItemClick(0)}>Romance</Dropdown.Item>
-          <Dropdown.Item onClick={() => handleItemClick(1)}>Fantasy</Dropdown.Item>
-          <Dropdown.Item onClick={() => handleItemClick(2)}>Horror</Dropdown.Item>
-          <Dropdown.Item onClick={() => handleItemClick(3)}>History</Dropdown.Item>
-          <Dropdown.Item onClick={() => handleItemClick(4)}>Sci-fi</Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => {
+              handleItemClick(0);
+              handleChange(e);
+            }}
+          >
+            Romance
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => {
+              handleItemClick(1);
+              handleChange(e);
+            }}
+          >
+            Fantasy
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => {
+              handleItemClick(2);
+              handleChange(e);
+            }}
+          >
+            Horror
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => {
+              handleItemClick(3);
+              handleChange(e);
+            }}
+          >
+            History
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => {
+              handleItemClick(4);
+              handleChange(e);
+            }}
+          >
+            Sci-fi
+          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
       {selectedGenre !== null && <GenerateCards selectedGenre={selectedGenre} onBookClick={handleBookClick} />}
