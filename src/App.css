@@ -23,7 +23,7 @@ footer {
 }
 
 .selected {
-  background-color: green !important;
+  border: 2px dashed red !important;
 }
 
 #comment-area {

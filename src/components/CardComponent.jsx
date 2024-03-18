@@ -27,7 +27,16 @@ class DropdownList extends Component {
     });
   };
 
-  handleBookClick = (book) => {
+  handleBookClick = (book, event) => {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+      card.classList.remove("selected");
+    });
+
+    const card = event.target.closest(".card");
+    if (card) {
+      card.classList.add("selected");
+    }
     this.setState({
       selectedBook: book,
     });
@@ -94,7 +103,7 @@ class DropdownList extends Component {
         </Dropdown>
         <Container>
           <Row className="justify-content-center">
-            <Col sm={6}>{selectedGenre !== null && <GenerateCards selectedGenre={selectedGenre} onBookClick={this.handleBookClick} />}</Col>
+            <Col sm={6}>{selectedGenre !== null && <GenerateCards selectedGenre={selectedGenre} onBookClick={(book, event) => this.handleBookClick(book, event)} />}</Col>
             <Col sm={6}>{selectedBook !== null && <CommentArea bookId={selectedBook} />}</Col>
           </Row>
         </Container>

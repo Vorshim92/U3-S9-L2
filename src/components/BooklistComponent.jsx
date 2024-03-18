@@ -31,7 +31,7 @@ function GenerateCards({ selectedGenre, onBookClick }) {
                     <small className="text-muted">{book.price}€</small>
                   </div>
                   <div className="mt-2">
-                    <Button variant="primary" onClick={() => onBookClick(book.asin)}>
+                    <Button variant="primary" onClick={(event) => onBookClick(book.asin, event)}>
                       VISUALIZZA
                     </Button>
                   </div>
