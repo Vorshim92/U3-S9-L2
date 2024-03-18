@@ -26,6 +26,11 @@ footer {
   background-color: green !important;
 }
 
+#comment-area {
+  position: sticky;
+  top: 0;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

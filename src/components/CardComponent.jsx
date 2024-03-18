@@ -1,93 +1,106 @@
-import React, { useState } from "react";
-
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Dropdown from "react-bootstrap/Dropdown";
-import GenerateCard from "./SingleBookComponent";
+import React, { Component } from "react";
+import { Dropdown, Container, Row, Col } from "react-bootstrap";
 import romance from "../json/romance.json";
 import fantasy from "../json/fantasy.json";
 import horror from "../json/horror.json";
 import history from "../json/history.json";
 import scifi from "../json/scifi.json";
 import GenerateCards from "./BooklistComponent";
+import CommentArea from "./CommentArea";
 
 const allGenres = [romance, fantasy, horror, history, scifi];
-console.log(allGenres);
 
-function DropdownList() {
-  const [selectedGenre, setSelectedGenre] = useState(null);
-  const [selectedBook, setSelectedBook] = useState(null);
-  const [selectedButton, setSelectedButton] = useState("Seleziona una Categoria");
-
-  function handleItemClick(index) {
-    setSelectedGenre(index);
-    setSelectedBook(null);
+class DropdownList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedGenre: null,
+      selectedBook: null,
+      selectedButton: "Seleziona una Categoria",
+    };
   }
 
-  function handleBookClick(book) {
-    setSelectedBook(book);
-  }
-  const handleChange = (event) => {
-    setSelectedButton(event.target.innerText);
+  handleItemClick = (index) => {
+    this.setState({
+      selectedGenre: index,
+      selectedBook: null,
+    });
   };
 
-  return (
-    <>
-      {selectedBook !== null && <GenerateCard asin={selectedBook} genre={selectedGenre} />}
+  handleBookClick = (book) => {
+    this.setState({
+      selectedBook: book,
+    });
+  };
 
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          {selectedButton}
-        </Dropdown.Toggle>
+  handleChange = (event) => {
+    this.setState({
+      selectedButton: event.target.innerText,
+    });
+  };
 
-        <Dropdown.Menu>
-          <Dropdown.Item
-            onClick={(e) => {
-              handleItemClick(0);
-              handleChange(e);
-            }}
-          >
-            Romance
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={(e) => {
-              handleItemClick(1);
-              handleChange(e);
-            }}
-          >
-            Fantasy
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={(e) => {
-              handleItemClick(2);
-              handleChange(e);
-            }}
-          >
-            Horror
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={(e) => {
-              handleItemClick(3);
-              handleChange(e);
-            }}
-          >
-            History
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={(e) => {
-              handleItemClick(4);
-              handleChange(e);
-            }}
-          >
-            Sci-fi
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-      <Container fluid>
-        <Row className="justify-content-center gap-3">{selectedGenre !== null && <GenerateCards selectedGenre={selectedGenre} onBookClick={handleBookClick} />}</Row>
-      </Container>
-    </>
-  );
+  render() {
+    const { selectedGenre, selectedBook, selectedButton } = this.state;
+
+    return (
+      <>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            {selectedButton}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item
+              onClick={(e) => {
+                this.handleItemClick(0);
+                this.handleChange(e);
+              }}
+            >
+              Romance
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={(e) => {
+                this.handleItemClick(1);
+                this.handleChange(e);
+              }}
+            >
+              Fantasy
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={(e) => {
+                this.handleItemClick(2);
+                this.handleChange(e);
+              }}
+            >
+              Horror
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={(e) => {
+                this.handleItemClick(3);
+                this.handleChange(e);
+              }}
+            >
+              History
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={(e) => {
+                this.handleItemClick(4);
+                this.handleChange(e);
+              }}
+            >
+              Sci-fi
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Container>
+          <Row className="justify-content-center">
+            <Col sm={6}>{selectedGenre !== null && <GenerateCards selectedGenre={selectedGenre} onBookClick={this.handleBookClick} />}</Col>
+            <Col sm={6}>{selectedBook !== null && <CommentArea bookId={selectedBook} />}</Col>
+          </Row>
+        </Container>
+      </>
+    );
+  }
 }
 
 export { allGenres };
