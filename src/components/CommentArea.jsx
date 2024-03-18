@@ -66,7 +66,6 @@ class CommentArea extends Component {
       if (!response.ok) {
         throw new Error(`Failed to add comment: ${response.statusText}`);
       }
-      // After adding comment, fetch updated comments
       this.fetchComments();
     } catch (error) {
       console.error("Error adding comment:", error);
